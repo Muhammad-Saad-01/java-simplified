@@ -45,9 +45,9 @@ Processing collections required verbose loops and temporary variables:
 List<String> highValueCustomers = new ArrayList<>();
 for(Order order :orders){
 		if(order.getTotalValue() >1000){
-		highValueCustomers.add(order.getCustomerName());
+		    highValueCustomers.add(order.getCustomerName());
 		}
-		}
+}
 ```
 
 ---
@@ -189,8 +189,8 @@ System.out.println(predicate.test("test value")); // false
 // Real-world example - filtering
 List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 List<Integer> evenNumbers = numbers.stream()
-		.filter(n -> n % 2 == 0)  // Predicate used here
-		.collect(Collectors.toList());
+                                            .filter(n -> n % 2 == 0)  // Predicate used here
+                                            .collect(Collectors.toList());
 ```
 
 #### 4. Function<T, R>
@@ -206,8 +206,8 @@ System.out.println(function.apply("test string")); // 11
 // Real-world example - transformation
 List<String> words = Arrays.asList("hello", "world", "java");
 List<Integer> lengths = words.stream()
-		.map(function)  // Transform string to its length
-		.collect(Collectors.toList());
+                                      .map(function)  // Transform string to its length
+		                              .collect(Collectors.toList());
 ```
 
 ---
@@ -222,20 +222,14 @@ Before Java 8, iterating through collections required verbose syntax:
 List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5);
 
 // Traditional for loop
-for(
-int i = 0; i <nums.
-
-size();
-
-i++){
-		System.out.println(nums.get(i));
+		for (int i = 0; i < nums.size(); i++) {
+			System.out.println(nums.get(i));
 		}
 
 // Enhanced for loop (Java 5)
-		for(
-Integer num :nums){
-		System.out.println(num);
-}
+		for (Integer num : nums) {
+			System.out.println(num);
+		}
 ```
 
 ### The Java 8 Solution
@@ -247,9 +241,7 @@ The `forEach` method was added to the `Iterable` interface (which is extended by
 nums.forEach(x ->System.out.println(x));
 
 // forEach with method reference
-		nums.
-
-forEach(System.out::println);
+nums.forEach(System.out::println);
 ```
 
 **Benefits:**
@@ -312,12 +304,8 @@ public Optional<Order> findOrderByIdWithOptional(int targetId) {
 Optional<Order> orderOptional = orderRepository.findOrderByIdWithOptional(19);
 
 // Safe check
-if(orderOptional.
-
-isPresent()){
-		System.out.println(orderOptional.get().
-
-getItems());
+		if (orderOptional.isPresent()) {
+			System.out.println(orderOptional.get().getItems());
 		}
 ```
 
@@ -373,22 +361,15 @@ L **DON'T:**
 
 ```java
 // Filtering and transforming - verbose and error-prone
-List<String> activeCustomerNames = new ArrayList<>();
-for(
-Order order :orders){
-		if(order.
-
-getStatus().
-
-equals("ACTIVE")){
-String customerName = order.getCustomerName();
-        if(customerName !=null){
-		activeCustomerNames.
-
-add(customerName.toUpperCase());
-		}
-		}
-		}
+    List<String> activeCustomerNames = new ArrayList<>();
+    for (Order order : orders) {
+        if (order.getStatus().equals("ACTIVE")) {
+            String customerName = order.getCustomerName();
+            if (customerName != null) {
+                activeCustomerNames.add(customerName.toUpperCase());
+            }
+        }
+    }
 ```
 
 **After Java 8:**
@@ -438,24 +419,17 @@ Before Stream API, processing collections of data required verbose, imperative c
 
 ```java
 // Traditional approach - verbose and error-prone
-List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10);
+    List<Integer> nums = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10);
 
 // Filter even numbers, double them, and sum them up
-int sumOfEvenNumbersUsingForLoop = 0;
-for(
-int i = 0; i <nums.
-
-size();
-
-i++){
-		if(nums.
-
-get(i) %2==0){           // Filter
-int doubled = nums.get(i) * 2;     // Transform
-sumOfEvenNumbersUsingForLoop +=doubled; // Accumulate
+    int sumOfEvenNumbersUsingForLoop = 0;
+    for (int i = 0; i < nums.size(); i++) {
+        if (nums.get(i) % 2 == 0) {           // Filter
+            int doubled = nums.get(i) * 2;     // Transform
+            sumOfEvenNumbersUsingForLoop += doubled; // Accumulate
+        }
     }
-			}
-			System.out.println(sumOfEvenNumbersUsingForLoop); // Output: 60
+    System.out.println(sumOfEvenNumbersUsingForLoop); // Output: 60
 ```
 
 **Problems with this approach:**
@@ -891,9 +865,8 @@ System.out.println("Parallel: "+parallelTime +"ms");
 
 ```java
 // WRONG: Don't modify shared state in parallel streams
-List<Integer> results = new ArrayList<>(); // Shared mutable state
-nums.parallelStream()
-    .forEach(num ->results.add(num *2)); // Race condition!
+		List<Integer> results = new ArrayList<>(); // Shared mutable state
+		nums.parallelStream().forEach(num -> results.add(num * 2)); // Race condition!
 
 // RIGHT: Use proper collectors
 List<Integer> results = nums.parallelStream()
