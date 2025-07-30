@@ -8,7 +8,7 @@ EX: used complex technique like pointers to link data items together, which was 
 
  For example, if they wanted to store five integers, they would create five variables like this:</br>
 
-```
+```java
       int num1 = 10;
       int num2 = 20;
       int num3 = 30;
@@ -25,23 +25,23 @@ This method becomes cumbersome, impractical and error-prone when dealing with a 
 * Each item in an array is called an element.
 * Each element is accessed by its numerical index.
 
-  <img src="https://docs.oracle.com/javase/tutorial/figures/java/objects-tenElementArray.gif" width="600" />
+  <img src="./assets/array.svg" width="600" />
 
 #### About arrays:
 1-Declaration and Initialization: 
  - To create an array, you first declare its type and then initialize it.
  - The syntax for declaring an array is:<br>
- ```
+```java
        dataType[ ] arrayName;
        Ex: int [ ] numbers;
 ```
  - Initialize the array with a specific size, you use the new keyword:<br>
 
- ```
+```java
    numbers = new int[9]; // Creates an array of size 9 to store integers.
 ```
  - You can initialize an array with values at the time of declaration, using curly braces:
-```
+```java
      Int[ ] numbers = {10, 20, 30, 40, 50};
 ```
 
@@ -50,32 +50,32 @@ This method becomes cumbersome, impractical and error-prone when dealing with a 
  - The first element is at index 0, the second at index 1, and so on.
  - To access an element, you use square brackets with the index inside:<br>
 
-```
+```java
    int element = numbers[2]; // Accesses the third element (index 2) of the array
 ```
 
 3- Length:<br>
  - Every array has a length property, which represents the number of elements it can store. You can retrieve the length using arrayName.length: <br>
-```     
+```java 
    int size = numbers.length; // Retrieves the size of the 'numbers' array
 ```
 
 4- iterating:
  - Java offers a convenient way to iterate through the elements of an array
 
-```
+```java
    for (int i = 0; i < arrayName.length; i++) {
     // Do something with arrayName[i]
    }
 ```
    // Enhanced for-loop (for-each loop)
-```
+```java
 for (dataType element : arrayName) {
     // Do something with 'element'
   }
 ```
 5- Operations: storing a collection of data, searching, deleting, and more. 
-```
+```java
         int [] numbers = new int[5]; //way1
         int[] nums = {10, 20, 30, 40, 50}; //way2
         System.out.println(numbers.length);
@@ -97,30 +97,30 @@ for (dataType element : arrayName) {
     starting address and the index of the element.<br>
 
   As we said before the memory is managed two areas (Stack , Heap)<br>
-  ```
+  ```java
   int [] nums;
   ```
   This will create a variable in the stack and has value null by default.
 
-  <img src="https://raw.githubusercontent.com/AsmaaIR/JavaCollections/master/assets/Array-1.png" width="500" />
+  <img src="./assets/array-stack-heap-1.svg" width="500" />
 
 Ok, But Now what happen when we allocate memory:
-```
+```java
  nums = new int[5]  // allocates memory for 5 integers
  ```
  This will allocate memory for 5 integers, Each one has its own address.
 As we said above these allocated memory units are contiguous, hence they will be spaced out by the same distance. 
 
-  <img src="https://raw.githubusercontent.com/AsmaaIR/JavaCollections/master/assets/Arrays-2.png" width="500" />
+  <img src="./assets/array-stack-heap-2.svg" width="500" />
 
 Now, what will happen if we store values by index.
-```
-MemoryAddressOfElement = BaseAddress + (Index*SizeOfElement)
+```java
+// MemoryAddressOfElement = BaseAddress + (Index*SizeOfElement)
 
 nums[0] = 50;   // 0*4 = 0 => 0+4000 = 4000
 num[4] = 60;  // 4*4 = 16 => 16+4000 = 4016
 ```
-  <img src="https://raw.githubusercontent.com/AsmaaIR/JavaCollections/master/assets/Arrays-3.png" width="500" />
+  <img src="./assets/array-stack-heap-3.svg" width="500" />
 
 ### Efficiency
 - Arrays provide efficient element access because the elements are stored contiguously in memory.
@@ -141,12 +141,12 @@ Arrays are best suited for scenarios where:</br>
 
 ##### Note*: keep in mind that their fixed size might limit their flexibility in certain situations.
 
-#### -Is there something that offers more flexibility?!
+##### Is there something that offers more flexibility?!
 ------------------------------------------------------------------------------------
 ## Collections:
 collections refer to a framework that provides a set of classes and interfaces to store, manage, and manipulate groups of objects. The Java Collections Framework includes various data structures, such as lists, sets, maps, queues, and more. These collections efficiently store, retrieve, and process data, making it easier to work with aggregate data and perform common operations like searching, sorting, and iteration.
 
-  <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/Colections-hierarchy.png" width="800" />
+  <img src="./assets/java-collections-hierarchy.svg" width="800"  alt="java collections hierarchy"/>
 
 
 ### List Interface:
@@ -154,7 +154,7 @@ collections refer to a framework that provides a set of classes and interfaces t
 - The List interface extends the Collection interface and adds methods to manipulate and access elements based on their index.
 - Key features include ordered collection, allowing duplicates, and dynamic size changes.
 
-  <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/list.png?raw=true" width="400" />
+  <img src="./assets/list-interface.svg" width="400" />
 
 
 #### ArrayList:
@@ -171,21 +171,21 @@ in Java 8: to save memory consumption and avoid immediate memory allocation make
 ArrayList<Integers> grades = new ArrayList<>();<br>
 grades.add(90);<br>
  
- <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/arraylist-1.png" width="700" />
+ <img src="./assets/ArrayList-1.svg" width="700" />
 
 -now we will add another 9 elements:
-```
+```java
 for (int i=1; i<10; i++) {
    grades.add(i+10);
  }
 ```
-  <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/arraylist-2.png" width="700" />
+  <img src="./assets/ArrayList-2.svg" width="700" />
 
 What happens when you want to add the 11th element? How does ArrayList become resizable?
-```
+```java
 grades.add(10, 100);
 ```
-  <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/arraylist--3.png" width="700" />
+  <img src="./assets/ArrayList-3.svg" width="700" />
 
 When you try to add a new element to an ArrayList in Java that has reached its default capacity of 10, the ArrayList will automatically resize itself to accommodate the new element. </br>
 Here's how it works:</br>
@@ -196,7 +196,7 @@ Here's how it works:</br>
 
 The default behavior for resizing an ArrayList is to increase the capacity by 50%. So, if the current capacity is 10, the new capacity will be 15.</br>
 
-```
+```java
        ArrayList<String> languages = new ArrayList<>();
 
         // Add elements to ArrayList
@@ -237,7 +237,7 @@ The efficiency of common ArrayList operations:<br>
 #### LinkedList:
 
 The LinkedList class provides the functionality of the linked list data structure (use a doubly linked list to store the elements). <br>
-  <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/linkedlist-1.png" width="700" />
+  <img src="./assets/linkedlist.svg" width="700" />
 
 * contain duplicate elements.
 * maintains insertion order.
@@ -250,11 +250,11 @@ The LinkedList class provides the functionality of the linked list data structur
 - Next - stores an address of the next element in the list. It is null for the last element.
 - Data - stores the actual data.
 
-  <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/linkedlist-2.png" width="700" />
+  <img src="./assets/linkedList2.svg" width="700" />
 
 When we remove Data1:
 The Next pointer of data will be pointed to data2 Address and the prev pointer of data 2 will point address to Data. <br>
-  <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/linkedlist-3.png" width="700" />
+  <img src="./assets/linkedlist3.svg" width="700" />
 
 - Queue(FIFO) First Input First output:
   Enqueue - > add element to the end of the list.
@@ -264,7 +264,7 @@ The Next pointer of data will be pointed to data2 Address and the prev pointer o
   Push()  Append the specified element to the end of the list
   pop() retrieve and remove the last element from this List.
 
-```
+```java
         // Creating list using the LinkedList class
         List<Integer> numbers = new LinkedList<>();
 
@@ -423,7 +423,7 @@ the current head node.
 ### Set: 
 Set contains unique elements only.
  
- <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/set-1.png" width="600" />
+ <img src="./assets/set1.svg" width="600" />
                                                    
 #### HashSet: (Use HashTable for Storage)
 - Store Elements by using a mechanism called hashing.
@@ -433,7 +433,7 @@ Set contains unique elements only.
 - Contains unique elements only.
 - HashSet is the best approach for search operation.
 
-```
+```java
              /* Hash Set*/
        HashSet<String> languages = new HashSet<>();
        // Using add() method
@@ -460,7 +460,7 @@ Set contains unique elements only.
 -HashSet has default initial capacity of 16.
 -HashSet has default load factor of 0.75 or 75%.
 
- <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/set-2.png" width="700" />
+ <img src="./assets/set2.svg" width="700" />
 
 ###### HashSet Efficiency:
 - The efficiency of a `HashSet` in Java is primarily determined by its underlying implementation, which is based on a `HashMap`.
@@ -501,7 +501,7 @@ Set contains unique elements only.
 
 However, due to the additional overhead of maintaining the linked list, LinkedHashSet may be slightly slower in terms of memory and insertion/deletion performance compared to a regular HashSet.
 Nevertheless, if you require a set with preserved insertion order and efficient access to elements, LinkedHashSet is a good choice.
-```
+```java
         LinkedHashSet<String> languages = new LinkedHashSet<>();
         languages.add("Java");
         languages.add("Python");
@@ -520,7 +520,7 @@ Nevertheless, if you require a set with preserved insertion order and efficient 
 - Contains Unique Elements Only.
 - We can customize the sorting of elements by using the Comparator interface or comparable.
 
-```
+```java
         TreeSet<Integer> numbers = new TreeSet<>();
         // Using the add() method
         numbers.add(2);
@@ -537,9 +537,9 @@ Nevertheless, if you require a set with preserved insertion order and efficient 
 ```
 
 ## Map:
- <img src="https://github.com/AsmaaIR/JavaCollections/blob/master/assets/map.png" width="600" />
+ <img src="./assets/Map.svg" width="600" />
 
-```
+```java
         /*HashMap*/
         // create a hashmap
         HashMap<String, Integer> languages = new HashMap<>();
@@ -589,7 +589,7 @@ Nevertheless, if you require a set with preserved insertion order and efficient 
         }
 ```
 
-```
+```java
        //Creating TreeMap of numbers
         TreeMap<String, Integer> numbers = new TreeMap<>();
         // add elements
@@ -624,7 +624,7 @@ Nevertheless, if you require a set with preserved insertion order and efficient 
         System.out.println("Last Entry: " + numbers.lastEntry());
 ```
  
-```
+```java
         // Creating LinkedHashMap of languages
         LinkedHashMap<String, Integer> languages = new LinkedHashMap<>();
         // add Elements
